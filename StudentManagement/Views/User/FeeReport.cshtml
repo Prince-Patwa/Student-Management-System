@@ -1,0 +1,88 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<StudentManagement.Models.fee>
+@{
+    Layout = "_UserLayout";
+    ViewBag.Title = "Student - Fee Report";
+}
+
+<div class="bg-white rounded-lg p-4">
+    <p class="text-2xl text-center mt-4 mb-4"><span class="border-b-4 border-blue-600 font-bold">All Fee History</span></p>
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Student Name</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>College</th>
+                <th>Course</th>
+                <th>Training</th>
+                <th>Registration Fee</th>
+                <th>Total Fee</th>
+                <th>Due Fee</th>
+                <th>Pay Amount</th>
+                <th>Remarks</th>
+                <th>Year</th>
+                <th>Payment Status</th>
+                <th>Payment ID</th>
+                <th>Date & Time</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in Model)
+            {
+                if(row.studentid == ViewBag.sid)
+                {
+                    Console.WriteLine(ViewBag.sid);
+                    <tr>
+                        <td>@row.id</td>
+                        <td>@row.name</td>
+                        <td>@row.mobile</td>
+                        <td>@row.email</td>
+                        <td>@row.college</td>
+                        <td>@row.course</td>
+                        <td>@row.training</td>
+                        <td>@row.regfee</td>
+                        <td>@row.totalfee</td>
+                        <td>@row.duefee</td>
+                        <td>@row.amount</td>
+                        <td>@row.remark</td>
+                        <td>@row.year</td>
+                        <td>
+                            @row.paymentstatus
+                            @if (row.paymentstatus == "Failed")
+                            {
+                                <a asp-action="RetryFeePay" asp-route-id="@row.id" class="px-2 py-1 bg-yellow-300 text-yellow-700 rounded">Retry</a>
+                            }
+                        </td>
+                        <td>@row.paymentid</td>
+                        <td>@row.datetime</td>
+                        <td>
+                            <a asp-action="PrintRecipt" asp-route-id="@row.id" class="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">Print Recipt</a>
+                        </td>
+                    </tr>
+                }
+                
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+<script>
+    $(document).ready(function(){
+            let table = new DataTable('#myTable');
+        })
+
+    new DataTable('#myTable', {
+            layout: {
+                topStart: {
+                    buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+                }
+            }
+        });
+</script>

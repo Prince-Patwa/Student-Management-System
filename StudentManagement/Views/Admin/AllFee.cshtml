@@ -1,0 +1,74 @@
+﻿@* 
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<StudentManagement.Models.fee>
+
+@{
+    ViewBag.Title = "Show - All Payment";
+    Layout = "_AdminLayout";
+}
+
+
+<h1 class="text-3xl font-bold mb-4 text-center">
+    <span class="border-b-4 border-blue-600">All Payment Details</span>
+</h1>
+
+<div class="bg-white rounded-lg shadow overflow-x-auto">
+    <table id="mytable" class="w-full text-sm text-left border-collapse">
+        <thead class="bg-gray-200 text-gray-700">
+            <tr>
+                <th>ID</th>
+                <th class="px-4 py-2 border">Student ID</th>
+                <th class="px-4 py-2 border">Student Name</th>
+                <th class="px-4 py-2 border">Phone Number</th>
+                <th class="px-4 py-2 border">Email</th>
+                <th class="px-4 py-2 border">College</th>
+                <th class="px-4 py-2 border">Course</th>
+                <th class="px-4 py-2 border">Training</th>
+                <th class="px-4 py-2 border">Registration Fee</th>
+                <th class="px-4 py-2 border">Total Fee</th>
+                <th class="px-4 py-2 border">Due Fee</th>
+                <th class="px-4 py-2 border">Pay Amount</th>
+                <th class="px-4 py-2 border">Remarks</th>
+                <th class="px-4 py-2 border">Year</th>
+                <th class="px-4 py-2 border">Payment Status</th>
+                <th class="px-4 py-2 border">Payment ID</th>
+                <th class="px-4 py-2 border">Date & Time</th>
+                <th class="px-4 py-2 border">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in Model)
+            {
+                <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-2 border">@row.id</td>
+                    <td class="px-4 py-2 border">@row.studentid</td>
+                    <td class="px-4 py-2 border">@row.name</td>
+                    <td class="px-4 py-2 border">@row.mobile</td>
+                    <td class="px-4 py-2 border">@row.email</td>
+                    <td class="px-4 py-2 border">@row.college</td>
+                    <td class="px-4 py-2 border">@row.course</td>
+                    <td class="px-4 py-2 border">@row.training</td>
+                    <td class="px-4 py-2 border">@row.regfee</td>
+                    <td class="px-4 py-2 border">@row.totalfee</td>
+                    <td class="px-4 py-2 border">@row.duefee</td>
+                    <td class="px-4 py-2 border">@row.amount</td>
+                    <td class="px-4 py-2 border">@row.remark</td>
+                    <td class="px-4 py-2 border">@row.year</td>
+                    <td class="px-4 py-2 border">
+                        @row.paymentstatus
+                        @if (row.paymentstatus == "Failed")
+                        {
+                            <a asp-action="RetryFeePay" asp-route-id="@row.id" class="px-2 py-1 bg-yellow-300 text-yellow-700 rounded">Retry</a>
+                        }
+                    </td>
+                    <td class="px-4 py-2 border">@row.paymentid</td>
+                    <td class="px-4 py-2 border">@row.datetime</td>
+                    <td class="px-4 py-2 border">
+                        <a asp-action="PrintRecipt" asp-route-id="@row.id" class="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">Print Recipt</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

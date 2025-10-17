@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.Title</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-600 px-4">
+  <div class="max-w-7xl mx-auto flex items-center justify-between py-3">
+    <!-- Logo -->
+    <div class="flex items-center space-x-2">
+      <img src="/images/genius.jpg" class="h-10 w-10 rounded-full" alt="Logo" />
+      <span class="text-white font-bold text-xl">Genius</span>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button id="menu-btn" class="lg:hidden text-white text-3xl focus:outline-none">
+      ☰
+    </button>
+
+    <!-- Links -->
+    <ul id="menu" class="hidden lg:flex space-x-6 text-white font-semibold">
+      <li><a asp-action="Index" asp-controller="Website" class="hover:text-yellow-300">Home</a></li>
+      <li><a asp-action="AboutUs" class="hover:text-yellow-300">About Us</a></li>
+      <li><a asp-action="ContactUs" class="hover:text-yellow-300">Contact Us</a></li>
+      <li><a asp-action="Services" class="hover:text-yellow-300">Services</a></li>
+      <li><a asp-action="Gallery" class="hover:text-yellow-300">Gallery</a></li>
+      <!-- Login Button with Dropdown -->
+        <li class="relative">
+            <button id="loginBtn" class="text-white">
+                Login ▼
+            </button>
+
+            <!-- Dropdown Menu -->
+            <div id="loginDropdown" class="absolute hidden mt-2 bg-white shadow-lg rounded-md w-40 z-50 right-0 lg:right-auto lg:left-0">
+                <ul class="py-2 text-gray-700">
+                    <li>
+                        <a asp-action="Index" asp-controller="Home" class="block px-4 py-2 hover:bg-gray-100">Admin Login</a>
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="Student" class="block px-4 py-2 hover:bg-gray-100">Student Login</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+      @* <li>
+        <a asp-action="Index" asp-controller="Home"
+           class="bg-red-700 px-4 py-2 rounded-lg hover:bg-red-800">
+          Admin Login
+        </a>
+      </li>
+      <li>
+        <a asp-action="Index" asp-controller="Student"
+           class="bg-red-700 px-4 py-2 rounded-lg hover:bg-red-800">
+          Student Login
+        </a>
+      </li> *@
+    </ul>
+  </div>
+
+  <!-- Mobile Menu (hidden by default) -->
+  <ul id="mobile-menu" class="lg:hidden hidden flex-col space-y-3 py-3 text-white font-semibold">
+    <li><a asp-action="Index" asp-controller="Website" class="block px-2">Home</a></li>
+    <li><a asp-action="AboutUs" class="block px-2">About Us</a></li>
+    <li><a asp-action="ContactUs" class="block px-2">Contact Us</a></li>
+    <li><a asp-action="Services" class="block px-2">Services</a></li>
+    <li><a asp-action="Gallery" class="block px-2">Gallery</a></li>
+    @* <li>
+      <a asp-action="Index" asp-controller="Home"
+         class="block bg-red-700 px-4 py-2 rounded-lg text-center hover:bg-red-800">
+        Admin Login
+      </a>
+    </li>
+    <li>
+        <a asp-action="Index" asp-controller="Student"
+           class="bg-red-700 px-4 py-2 rounded-lg hover:bg-red-800">
+          Student Login
+        </a>
+      </li> *@
+
+            <li class="relative">
+                <button class="text-white" id="mobileLoginBtn">
+                    Login ▼
+                </button>
+                <div id="mobileLoginDropdown" class="hidden bg-white shadow-lg rounded-md mt-1">
+                    <ul class="py-2 text-gray-700">
+                        <li><a asp-action="Index" asp-controller="Home" class="block px-4 py-2 hover:bg-gray-100">Admin Login</a></li>
+                        <li><a asp-action="Index" asp-controller="Student" class="block px-4 py-2 hover:bg-gray-100">Student Login</a></li>
+                    </ul>
+                </div>
+            </li>
+
+  </ul>
+</nav>
+
+    <script>
+        // Toggle mobile menu
+        document.getElementById("menu-btn").addEventListener("click", function () {
+          document.getElementById("mobile-menu").classList.toggle("hidden");
+        });
+    </script>
+
+    @RenderBody()
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 px-4 py-10">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+            <!-- Quick Links -->
+            <div>
+                <h1 class="mb-2 text-xl font-bold text-white">Quick Links</h1>
+                <ul class="text-white space-y-2">
+                    <li><a asp-action="Index">Home</a></li>
+                    <li><a asp-action="AboutUs">About Us</a></li>
+                    <li><a asp-action="ContactUs">Contact Us</a></li>
+                    <li><a asp-action="Services">Services</a></li>
+                    <li><a asp-action="Gallery">Gallery</a></li>
+                </ul>
+            </div>
+            <!-- Social -->
+            <div>
+                <h2 class="text-xl mb-2 font-bold text-white">Social Media</h2>
+                <ul class="text-white space-y-2">
+                    <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
+                    <li><a href="https://twitter.com" target="_blank">Twitter</a></li>
+                    <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+                </ul>
+            </div>
+            <!-- Map -->
+            <div class="flex justify-center md:justify-end">
+                <iframe class="w-full md:w-[400px] h-48 rounded-lg"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d227822.60371517495!2d80.77770104096673!3d26.848596484160048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfd991f32b16b%3A0x93ccba8909978be7!2sLucknow%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1757680098007!5m2!1sen!2sin"
+                        style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+        <div class="mt-8 h-16 bg-blue-700 text-center text-white font-bold flex items-center justify-center">
+            &copy; Bajrangi Patwa, Genius Coaching Center, Goshaiganj, Ayodhaya
+        </div>
+    </footer>
+
+    <!--loader start-->
+    <script>
+        setTimeout(function(){
+            document.getElementById("preloader").style.display="none";
+            document.getElementById("main-content").style.display="block";
+        },1000)     //ms = 1 second
+    </script>
+    <!--loader end-->
+
+    <!--Bottom to to go arrow start-->
+    <button id="topbtn">↑</button>
+
+    <script>
+        const btn=document.getElementById("topbtn");
+        window.onscroll=function(){
+            if(window.scrollY > 200)btn.style.display="block";
+            else btn.style.display="none";
+        };
+        btn.onclick = function(){
+            window.scrollTo({top:0,behavior:'smooth'});
+        };
+    </script>
+    <!--Bottom to to go arrow end-->
+
+    <script>
+        const loginBtn = document.getElementById("loginBtn");
+        const loginDropdown = document.getElementById("loginDropdown");
+
+        loginBtn.addEventListener("click", (e) => {
+            e.stopPropagation(); // dropdown click inside ke liye
+            loginDropdown.classList.toggle("hidden");
+        });
+
+        // Close dropdown on outside click
+        window.addEventListener("click", (e) => {
+            if (!loginBtn.contains(e.target) && !loginDropdown.contains(e.target)) {
+                loginDropdown.classList.add("hidden");
+            }
+        });
+    </script>
+
+    <script>
+        const mobileLoginBtn = document.getElementById("mobileLoginBtn");
+        const mobileLoginDropdown = document.getElementById("mobileLoginDropdown");
+
+        mobileLoginBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            mobileLoginDropdown.classList.toggle("hidden");
+        });
+
+        window.addEventListener("click", (e) => {
+            if (!mobileLoginBtn.contains(e.target) && !mobileLoginDropdown.contains(e.target)) {
+                mobileLoginDropdown.classList.add("hidden");
+            }
+        });
+    </script>
+
+
+</body>
+</html>

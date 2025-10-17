@@ -1,0 +1,125 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model StudentManagement.Models.managestudentpage
+@{
+    ViewBag.Title = "Manage Student";
+    Layout = "_AdminLayout";
+}
+
+<div>
+    <h1 class="text-3xl font-bold mb-4 text-center">
+        <span class="border-b-4 border-blue-600">Manage Student in Batch</span>
+    </h1>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>
+                Batch Name : @Model.batch.name
+                <button class="btn btn-primary float-end" type="button" data-bs-toggle="modal" data-bs-target="#mymodal">Add Student To Batch</button>
+            </h1>
+            <h1>Students in this batch</h1>
+
+            <table id="batchTable" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Student Name</td>
+                        <td>Batch Name</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach(var row in Model.batchallot)
+                    {
+                        <tr>
+                            <td>@row.id</td>
+                            <td>@row.admission.name</td>
+                            <td>@row.batch.name</td>
+                            <td><a asp-action="RemoveStudent" asp-route-id="@row.id" class="btn btn-danger">Remove</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#batchTable').DataTable();
+        });
+    </script>
+</div>
+
+<!--Modal start-->
+<div class="modal fade" tabindex="-1" id="mymodal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add More Students in this Batch</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-action="AddStudentsToBatch">
+                    <input type="hidden" name="batchid" value="@Model.batch.id"/>
+
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Select</th>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Mobile</th>
+                                <th>Duration</th>
+                                <th>Technology</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach(var row in Model.admission)
+                            {
+                                bool status = false;
+                                var data = Model.batchallot.Where(x => x.batchid == Model.batch.id && x.studentid == row.id).ToList();
+                                if (data.Count > 0)
+                                {
+                                    status = true;
+                                }
+                                <tr>
+                                    <td>
+                                        @if (status == true)
+                                        {
+                                            <input type="checkbox" checked disabled name="selectedstudent" value="@row.id" />
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="selectedstudent" value="@row.id" />
+                                        }
+                                    </td>
+                                    <td>@row.id</td>
+                                    <td>
+                                        @row.name
+                                        @if (status == true)
+                                        {
+                                            <span class="badge bg-success">Already in batch</span>  
+                                        }
+                                    </td>
+                                    <td>@row.mobile</td>
+                                    <td>@row.duration</td>
+                                    <td>@row.technology</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <br />
+                    <button class="btn btn-primary">Add Selected Students</button>
+                    <br />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal end-->

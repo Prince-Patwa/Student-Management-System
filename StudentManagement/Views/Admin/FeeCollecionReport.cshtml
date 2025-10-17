@@ -1,0 +1,66 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<StudentManagement.Models.FeeCollection>
+@{
+    ViewBag.Title = "Fee Collection Report";
+    Layout = "_AdminLayout";
+    int sr = 1;
+    double total = 0;
+}
+
+<div>
+    <h1>Fee Collection Report</h1>
+
+    <table id="mytable">
+        <thead>
+            <tr>
+                <th>Sr.</th>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Payment Mode</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Source</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach(var row in Model)
+            {
+                total += double.Parse(row.amount);
+                <tr>
+                    <td>@sr</td>
+                    <td>@row.name</td>
+                    <td>₹ @row.amount</td>
+                    <td>
+                        @if (row.paymentmode == "Cash")
+                        {
+                            <span class="text-red-600">@row.paymentmode</span>
+                        }
+                        else
+                        {
+                            <span class="text-green-600">Online @row.paymentmode</span>
+                        }
+                    </td>
+                    <td>@row.status</td>
+                    <td>@row.date</td>
+                    <td>@row.source</td>
+                </tr>
+                sr++;
+            }
+        </tbody>
+        <tfoot>
+            <tr class="text-md font-bold">
+                <td colspan="2">
+                    Total Amount Collection
+                </td>
+                <td colspan="5">
+                    ₹ @total
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <h3 class="text-xl font-bold">Total Fee Collection : ₹ @total </h3>
+</div>

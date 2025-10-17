@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+
+<div class="w-full min-h-screen bg-gray-100 flex justify-center items-center p-4">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6 text-center">
+        
+        <h1 class="text-2xl md:text-3xl font-bold text-red-600 mb-4">
+            <span class="border-b-4 border-red-600 pb-1">Payment Failed, Try Again</span>
+        </h1>
+
+        <p class="text-gray-600 mb-6">
+            Unfortunately, your payment was not successful. Please try again or contact support if the issue persists.
+        </p>
+
+        
+        <div class="flex flex-col gap-4 sm:flex-row justify-center">
+            <a asp-action="RetryRegistrationFee" asp-route-id="@ViewBag.id" 
+               class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
+                Retry Payment
+            </a>
+            
+            <a asp-action="Index" 
+               class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
+                Go To Dashboard
+            </a>
+        </div>
+
+        <p class="text-sm text-gray-500 mt-6">
+            Need help? Contact <a href="mailto:bajrangipatwa9@gmail.com" class="text-indigo-600 underline">bajrangipatwa9@gmail.com</a>
+        </p>
+    </div>
+</div>

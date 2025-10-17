@@ -1,0 +1,41 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<StudentManagement.Models.enquiry>
+@{
+    ViewBag.Title = "Show All Enquiry";
+    Layout = "_AdminLayout";
+}
+
+<h1 class="text-3xl font-bold mb-4 text-center">
+    <span class="border-b-4 border-blue-600">View All Enquiry</span>
+</h1>
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-border table-striped" id="mytable">
+            <thead>
+                <tr>
+                    <td>Enquiry ID</td>
+                    <td>Name</td>
+                    <td>Email</td>
+                    <td>Message</td>
+                    <td>Actions</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var row in Model)
+                {
+                    <tr>
+                        <td>@row.id</td>
+                        <td>@row.name</td>
+                        <td>@row.email</td>
+                        <td>@row.description</td>
+                        <td>
+                            <a asp-action="DeleteEnquiry" asp-route-id="@row.id" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </dic>
+</div>

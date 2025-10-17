@@ -1,0 +1,157 @@
+﻿@{
+    Layout = "_AdminLayout";
+    ViewBag.Title = "Dashboard - Admin";
+}
+
+<!-- Content -->
+<main class="flex-1 md:ml-0 p-6">
+    <h1 class="text-3xl font-bold mb-4 text-center">
+        <span class="border-b-4 border-blue-600">Admin Dashboard</span>
+    </h1>
+    <!-- Example grid cards -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+        <div class="bg-blue-400 p-6 rounded-xl shadow hover:shadow-lg transition">
+            <h2 class="font-semibold text-lg mb-2">
+                <i class="fa-solid fa-calendar-day"></i> 
+                Today's Admissions
+            </h2>
+            <p class="text-2xl font-bold text-gray-700">@ViewBag.todayadmission</p>
+        </div>
+        <div class="bg-yellow-400 p-6 rounded-xl shadow hover:shadow-lg transition">
+            <h2 class="font-semibold text-lg mb-2">
+                <i class="fa-solid fa-users"></i> 
+                Total Admission
+            </h2>
+            <p class="text-2xl font-bold text-gray-700">@ViewBag.totaladmission</p>
+        </div>
+        <div class="bg-green-400 p-6 rounded-xl shadow hover:shadow-lg transition">
+            <h2 class="font-semibold text-lg mb-2">
+                <i class="fa-solid fa-money-bill"></i>
+                Today's Fees Collection
+            </h2>
+            <p class="text-2xl font-bold text-gray-700">
+                <i class="fa-solid fa-indian-rupee-sign"></i>
+                @ViewBag.todayfee
+            </p>
+        </div>
+        <div class="bg-red-400 p-6 rounded-xl shadow hover:shadow-lg transition">
+            <h2 class="font-semibold text-lg mb-2">
+                <i class="fa-solid fa-coins"></i>
+                Total Fee Collected
+            </h2>
+            <p class="text-2xl font-bold text-gray-700">
+                <i class="fa-solid fa-indian-rupee-sign"></i>
+                @ViewBag.totalfee
+            </p>
+        </div>
+        <div class="bg-purple-400 p-6 rounded-xl shadow hover:shadow-lg transition">
+            <h2 class="font-semibold text-lg mb-2">
+                <i class="fa-solid fa-clock"></i>
+                Pending Fees
+            </h2>
+            <p class="text-2xl font-bold text-gray-700">
+                <i class="fa-solid fa-indian-rupee-sign"></i>
+                @ViewBag.duefee
+            </p>
+        </div>
+    </div>
+
+    <!-- Chart Section -->
+    <section class="mt-10">
+        <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Analytics Overview</h2>
+
+        <!-- Responsive Grid for Multiple Charts -->
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+            <!-- Chart 1 -->
+            <div class="bg-white shadow-md rounded-2xl p-4 flex flex-col items-center">
+                <h3 class="font-semibold text-gray-700 mb-3">Weekly Admissions</h3>
+                <div class="w-full h-72">
+                    <canvas id="admissionChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Chart 2 -->
+            <div class="bg-white shadow-md rounded-2xl p-4 flex flex-col items-center">
+                <h3 class="font-semibold text-gray-700 mb-3">Fees Collected (Weekly)</h3>
+                <div class="w-full h-72">
+                    <canvas id="feesChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Chart 3 -->
+            <div class="bg-white shadow-md rounded-2xl p-4 flex flex-col items-center">
+                <h3 class="font-semibold text-gray-700 mb-3">Pending Fees Trend</h3>
+                <div class="w-full h-72">
+                    <canvas id="pendingChart"></canvas>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+
+<!-- Chart.js Script -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Weekly Admission Chart
+    fetch("http://localhost:5008/api/AdminAPI/WeeklyAdmission")
+        .then(response => response.json())
+        .then(data => {
+            new Chart(document.getElementById('admissionChart'), {
+                type: 'bar',
+                data: {
+                    labels: data.dates,
+                    datasets: [{
+                        label: 'Weekly Admissions',
+                        data: data.counts,
+                        backgroundColor: ['#4F46E5', '#F59E0B', '#10B981', '#EF4444', '#8B5CF6', '#3B82F6', '#F97316'],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: true, position: 'bottom' },
+                        title: { display: false }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, ticks: { stepSize: 1 } }
+                    }
+                }
+            });
+        })
+        .catch(error => console.error('Chart Load Error:', error));
+
+    // Placeholder for future charts (optional dummy data)
+    const dummyData = {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [{
+            label: 'Demo Data',
+            data: [5, 8, 6, 9, 7, 10, 4],
+            backgroundColor: '#10B981',
+            borderRadius: 6
+        }]
+    };
+
+    new Chart(document.getElementById('feesChart'), {
+        type: 'line',
+        data: dummyData,
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    new Chart(document.getElementById('pendingChart'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Paid', 'Pending'],
+            datasets: [{
+                data: [@ViewBag.totalfee, @ViewBag.duefee],
+                backgroundColor: ['#10B981', '#EF4444']
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+</script>

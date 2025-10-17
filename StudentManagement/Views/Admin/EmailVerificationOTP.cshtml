@@ -1,0 +1,21 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model StudentManagement.Models.admission
+@{
+    ViewBag.Title = "Email Verification by OTP";
+    Layout = "_AdminLayout";
+}
+
+<div class="d-flex justify-center align-ceter w-full p-5">
+    <div class="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl">
+        <h1 class="text-xl my-3">Send OTP On Registered Email</h1>
+        <form method="post" asp-action="VerifyEmailOTP">
+            <input type="hidden" asp-for="id"/>
+            <label class="d-block text-gray-700 font-bold">Email</label>
+            <input type="email" asp-for="email" readonly class="w-full p-2 my-2 bg-gray-100 rounded-md hover:bg-gray-200"/>
+
+            <button type="submit" class="bg-blue-500 p-2 d-block w-full rounded-md text-white font-bold my-3 hover:bg-blue-700">Send OTP</button>
+        </form>
+    </div>
+</div>

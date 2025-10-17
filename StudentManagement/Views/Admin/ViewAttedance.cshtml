@@ -1,0 +1,205 @@
+﻿@model IEnumerable<StudentManagement.Models.batch>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "View Attendance - Admin";
+    Layout = "_AdminLayout";
+}
+
+<h1 class="text-3xl font-bold mb-4 text-center">
+    <span class="border-b-4 border-blue-600">View All Students Attendance</span>
+</h1>
+
+<div class="row">
+    <div class="col-sm-6 offset-sm-3">
+
+        Select Batch
+        <select class="form-control" name="batchid" id="batchid" required>
+            <option value="">-Select Batch-</option>
+            @foreach (var row in Model)
+            {
+                <option value="@row.id"> @row.name </option>
+            }
+        </select>
+        <br />
+        Select Display Mode
+        <select class="form-control" name="mode" id="mode" onchange="setmode()" required>
+            <option value="">-Select Mode-</option>
+            <option value="daily">Daily Attendance</option>
+            <option value="monthly">Monthly Attendance</option>
+        </select>
+        <br />
+        <div id="dailymode">
+            Select Date To View Attendance
+            <input type="date" class="form-control" name="date" id="date" required />
+        </div>
+        <div id="monthlymode">
+            Select Month & Year to View Attendance
+            <select class="form-control" id="month" name="month" required>
+                <option value="">-Select Month-</option>
+                <option value="01">Jan</option>
+                <option value="02">Feb</option>
+                <option value="03">Mar</option>
+                <option value="04">Apr</option>
+                <option value="05">May</option>
+                <option value="06">Jun</option>
+                <option value="07">Jul</option>
+                <option value="08">Aug</option>
+                <option value="09">Sep</option>
+                <option value="10">Oct</option>
+                <option value="11">Nov</option>
+                <option value="12">Dec</option>
+            </select>
+            <br />
+            <select class="form-control" id="year" name="year" required>
+                <option value="">-Select Year-</option>
+                <option>2023</option>
+                <option>2024</option>
+                <option>2025</option>
+                <option>2026</option>
+                <option>2027</option>
+            </select>
+
+        </div>
+
+        <br />
+        <button type="button" onclick="viewattendance()" class="btn btn-dark">View Attendance</button>
+
+        <!--table start-->
+        <div id="dailydata">
+            <table class="table table-bordered tavle-hover" id="table1">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Student Name</th>
+                        <th>Batch Name</th>
+                        <th>Attendance Date</th>
+                        <th>Remark</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tbody1">
+
+                </tbody>
+            </table>
+        </div>
+        <!--table end-->
+
+    </div>
+
+    <div class="mt-3" id="monthlydata"></div>
+</div>
+
+<style>
+    #dailymode, #monthlymode {
+        display: none;
+    }
+    #dailydata{
+        display: none;
+    }
+    #monthlydata{
+        display: none;
+    }
+</style>
+<script>
+    function setmode()
+    {
+        let a = mode.value;
+        if(a!="")
+        {
+            if(a=="daily") {
+                dailymode.style.display = "block";
+                monthlymode.style.display = "none";
+            }
+            else if(a=="monthly") {
+                monthlymode.style.display = "block";
+                dailymode.style.display = "none";
+            }
+        }
+    }
+
+    function viewattendance()
+    {
+        let a = mode.value;
+
+        if(a!="")
+        {
+            if(a=="daily")
+            {
+                // selected mode is 'Daily'
+                let b = batchid.value;
+                let c = date.value;
+                if(b=="" || c=="")
+                {
+                    alert("Must select batch and date");
+                }
+                else
+                {
+                    let formdata = new FormData();
+                    formdata.append("batchid", b);
+                    formdata.append("date", c);
+
+                    fetch("http://localhost:5008/api/AdminAPI/dailyattendance", { method:"POST", body: formdata })
+                    .then( (response) => {
+                        return response.json();
+                    } )
+                    .then( (data)=>{
+
+                        // console.table(data);
+                        tbody1.innerHTML = "";
+                        for(var row of data){
+                            var r = `<tr>
+                                <td>${row.id}<td>
+                                <td>${row.admission.name}<td>
+                                <td>${row.batch.name}<td>
+                                <td>${row.date}<td>
+                                <td class="${(row.remark=="Present")?"text-success":"text-danger"}">${row.remark}<td>
+                            <tr>`;
+                            tbody1.innerHTML += r;
+                        }
+                        dailydata.style.display = "block";
+
+                    } )
+
+                }
+
+            }
+            else if(a=="monthly")
+            {
+                // selected mode is 'Monthly'
+                var b = batchid.value;
+                var c = month.value;
+                var d = year.value;
+
+                if(b!="" || c!="" || d!=""){
+                    var mydata = new FormData();
+                    mydata.append("batchid", b);
+                    mydata.append("month", c);
+                    mydata.append("year", d);
+
+                    fetch("http://localhost:5008/api/AdminAPI/monthlyattendance",
+                    { 
+                        method:"POST", 
+                        body: mydata 
+                    })
+                    .then( (response) => {
+                        return response.text();
+                    } )
+                    .then( (data) => {
+                        // console.table(data);
+                        monthlydata.innerHTML = data;
+                        monthlydata.style.display = "block";
+                        dailydata.style.display = "none";
+                    } )
+                }
+                else{
+                    alert("Must select batch, month and year");
+                }
+            }
+        }
+
+    }
+
+</script>

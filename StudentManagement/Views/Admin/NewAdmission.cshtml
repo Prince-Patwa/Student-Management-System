@@ -1,0 +1,95 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model StudentManagement.Models.admission
+@{
+    ViewBag.Title = "New Admission - Admin";
+    Layout = "_AdminLayout";
+}
+
+<h1 class="text-3xl font-bold mb-4 text-center">
+    <span class="border-b-4 border-blue-600">New Admission</span>
+</h1>
+
+<div class="row">
+    <div class="col-sm-6 mx-auto">
+        <form asp-action="NewAdmission" method="post">
+            Enter Student Name :
+            <input type="text" asp-for="name" required placeholder="Enter student name" class="form-control"/><br/>
+            Enter Student Mobile Number:
+            <input type="number" asp-for="mobile" required placeholder="Enter student number" class="form-control" /><br />
+            Enter Student Father Name :
+            <input type="text" asp-for="fathername" required placeholder="Enter student Father name" class="form-control" /><br />
+            Enter Student Email Id :
+            <input type="email" asp-for="email" required placeholder="Enter student email" class="form-control" /><br />
+            Select Course Duration :
+            <select required asp-for="duration" class="form-control">
+                <option value="">--Select--</option>
+                <option>45 Days</option>
+                <option>3 Month</option>
+                <option>6 Month</option>
+            </select><br />
+
+            Select Course technology : 
+            <select required asp-for="technology" class="form-control">
+                <option value="">--Select--</option>
+                <option>Dot Net</option>
+                <option>Java</option>
+                <option>PHP</option>
+                <option>MERN</option>
+            </select><br/>
+
+            Enter Registration Fee :
+            <input type="text" asp-for="registrationfee" class="form-control" required placeholder="Registration fee" /><br />
+
+            Admission Fee Payment Mode
+            <input type="radio" value="Online" asp-for="paymentmode" checked />Online
+            <input type="radio" value="Cash" asp-for="paymentmode" />Cash
+            <br />
+
+            Enter Total Fee :
+            <input type="text" asp-for="totalfee" class="form-control" required placeholder="Total fee" /><br />
+
+            Select Student Qualification : 
+            <select required asp-for="qualification" class="form-control">
+                <option value="">--select--</option>
+                <option>Diploma</option>
+                <option>Graduation</option>
+                <option>Post Graduation</option>
+            </select>
+            <br/>
+
+            Select Student Year :
+            <select required asp-for="year" class="form-control">
+                <option value="">--select--</option>
+                <option>1st year</option>
+                <option>2nd year</option>
+                <option>3rd yera</option>
+                <option>4th yera</option>
+                <option>passout</option>
+            </select>
+            <br />
+
+            Enter Student Collage name ; 
+            <input type="text" asp-for="college" required placeholder="enter student college name " class="from form-control"/><br/>
+
+            <button type="reset" class="btn btn-light">Clear</button>
+
+            <button type="submit" class="btn btn-primary">Submit</button><br /><br />
+
+
+
+        </form>
+    </div>
+</div> 
+
+
+@* <div class="mt-2">
+    <h1 class="text-center text-3xl font-bold mb-3">
+        <span class="border-b-4 border-blue-600">New Admission</span>
+    </h1>
+    <div class="">
+        <lable>Enter Student Name</lable>
+        <input type="text" asp-for="name" required placeholder="Enter student name" class="form-control"/><br/>
+    </div>
+</div> *@

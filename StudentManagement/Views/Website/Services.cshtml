@@ -1,0 +1,114 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_WebsiteLayout";
+}
+
+<!-- Hero Section -->
+<section class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16 px-6 text-center">
+    <h1 class="text-4xl md:text-5xl font-bold mb-4">Our Services</h1>
+    <p class="max-w-2xl mx-auto text-lg">
+        We provide world-class coaching services to help students unlock their potential and achieve academic excellence.
+    </p>
+</section>
+
+<!-- Services Grid -->
+<section class="py-16 px-6 bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">
+            <span class="border-b-4 border-yellow-400">What We Offer</span>
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Card 1 -->
+            <div class="bg-white shadow-md rounded-2xl p-6 hover:shadow-xl transition">
+                <div class="text-blue-600 text-4xl mb-4">📘</div>
+                <h3 class="text-xl font-semibold mb-3">Classroom Coaching</h3>
+                <p class="text-gray-600">
+                    Interactive classroom programs with experienced teachers to help you learn effectively.
+                </p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-white shadow-md rounded-2xl p-6 hover:shadow-xl transition">
+                <div class="text-blue-600 text-4xl mb-4">💻</div>
+                <h3 class="text-xl font-semibold mb-3">Online Courses</h3>
+                <p class="text-gray-600">
+                    Flexible online learning with recorded sessions, quizzes, and live support.
+                </p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-white shadow-md rounded-2xl p-6 hover:shadow-xl transition">
+                <div class="text-blue-600 text-4xl mb-4">🧑‍🏫</div>
+                <h3 class="text-xl font-semibold mb-3">Doubt Solving</h3>
+                <p class="text-gray-600">
+                    Dedicated doubt-clearing sessions to ensure no concept remains unclear.
+                </p>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="bg-white shadow-md rounded-2xl p-6 hover:shadow-xl transition">
+                <div class="text-blue-600 text-4xl mb-4">📝</div>
+                <h3 class="text-xl font-semibold mb-3">Test Series</h3>
+                <p class="text-gray-600">
+                    Regular test series and assessments to track progress and boost confidence.
+                </p>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="bg-white shadow-md rounded-2xl p-6 hover:shadow-xl transition">
+                <div class="text-blue-600 text-4xl mb-4">📊</div>
+                <h3 class="text-xl font-semibold mb-3">Performance Tracking</h3>
+                <p class="text-gray-600">
+                    Detailed performance analysis and feedback for continuous improvement.
+                </p>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="bg-white shadow-md rounded-2xl p-6 hover:shadow-xl transition">
+                <div class="text-blue-600 text-4xl mb-4">🤝</div>
+                <h3 class="text-xl font-semibold mb-3">Personal Mentorship</h3>
+                <p class="text-gray-600">
+                    One-on-one mentorship to guide students in academics and career planning.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="py-16 px-6">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <!-- Left Image -->
+        <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/story/202008/tea_0.jpeg?size=690:388" alt="Why Choose Us"
+             class="rounded-2xl shadow-md">
+
+        <!-- Right Content -->
+        <div>
+            <h2 class="text-3xl font-bold mb-6 text-gray-800">
+                Why Choose <span class="text-blue-600">Genius Coaching?</span>
+            </h2>
+            <ul class="space-y-4 text-gray-700">
+                <li>✅ Experienced and certified faculty</li>
+                <li>✅ Proven track record of results</li>
+                <li>✅ Personalized learning approach</li>
+                <li>✅ Regular assessments and reports</li>
+                <li>✅ Supportive and motivating environment</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="bg-blue-600 text-white py-16 text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Start Your Learning Journey?</h2>
+    <p class="max-w-2xl mx-auto mb-6">
+        Join Genius Coaching today and take the first step towards academic success.
+    </p>
+    <a asp-action="ContactUs"
+       class="px-8 py-3 bg-yellow-400 text-black font-semibold rounded-xl shadow-lg hover:bg-yellow-500 transition">
+        Contact Us Now
+    </a>
+</section>

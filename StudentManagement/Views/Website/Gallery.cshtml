@@ -1,0 +1,105 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_WebsiteLayout";
+}
+
+<!-- Hero Section -->
+<section class="bg-gradient-to-r from-indigo-600 to-blue-700 text-white py-16 px-6 text-center">
+    <h1 class="text-4xl md:text-5xl font-bold mb-4">Gallery</h1>
+    <p class="max-w-2xl mx-auto text-lg">
+        Explore our classrooms, events, and student activities at Genius Coaching Center.
+    </p>
+</section>
+
+<!-- Gallery Grid -->
+<section class="py-16 px-6 bg-gray-50">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">
+            <span class="border-b-4 border-yellow-400">Our Memories</span>
+        </h2>
+
+        <!-- Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+            <!-- Image Card -->
+            <div class="group relative overflow-hidden rounded-xl shadow-md">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdBZJnaztII9Wc3sTqYQiSEI9-QRzVI4-SCw&s"
+                     alt="Classroom" class="w-full h-60 object-cover group-hover:scale-110 transition">
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                    <span class="text-white font-semibold">Classroom</span>
+                </div>
+            </div>
+
+            <div class="group relative overflow-hidden rounded-xl shadow-md">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpzmCbjK46P57bAhfUZ_gaosIMKCClXR7wMA&s"
+                     alt="Library" class="w-full h-60 object-cover group-hover:scale-110 transition">
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                    <span class="text-white font-semibold">Library</span>
+                </div>
+            </div>
+
+            <div class="group relative overflow-hidden rounded-xl shadow-md">
+                <img src="https://threebestrated.in/images/WinnerInstitute-Pune-MH.jpeg"
+                     alt="Lab" class="w-full h-60 object-cover group-hover:scale-110 transition">
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                    <span class="text-white font-semibold">Computer Lab</span>
+                </div>
+            </div>
+
+            <div class="group relative overflow-hidden rounded-xl shadow-md">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaLJN1zs2AA6IpDDbgE0wivvPfKrnOcxMQgQ&s"
+                     alt="Events" class="w-full h-60 object-cover group-hover:scale-110 transition">
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                    <span class="text-white font-semibold">Annual Function</span>
+                </div>
+            </div>
+
+            <div class="group relative overflow-hidden rounded-xl shadow-md">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdBZJnaztII9Wc3sTqYQiSEI9-QRzVI4-SCw&s"
+                     alt="Classroom" class="w-full h-60 object-cover group-hover:scale-110 transition">
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                    <span class="text-white font-semibold">Classroom</span>
+                </div>
+            </div>
+
+            <div class="group relative overflow-hidden rounded-xl shadow-md">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpzmCbjK46P57bAhfUZ_gaosIMKCClXR7wMA&s"
+                     alt="Library" class="w-full h-60 object-cover group-hover:scale-110 transition">
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                    <span class="text-white font-semibold">Library</span>
+                </div>
+            </div>
+
+            <div class="group relative overflow-hidden rounded-xl shadow-md">
+                <img src="https://threebestrated.in/images/WinnerInstitute-Pune-MH.jpeg"
+                     alt="Lab" class="w-full h-60 object-cover group-hover:scale-110 transition">
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                    <span class="text-white font-semibold">Computer Lab</span>
+                </div>
+            </div>
+
+            <div class="group relative overflow-hidden rounded-xl shadow-md">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaLJN1zs2AA6IpDDbgE0wivvPfKrnOcxMQgQ&s"
+                     alt="Events" class="w-full h-60 object-cover group-hover:scale-110 transition">
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                    <span class="text-white font-semibold">Annual Function</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="bg-blue-600 text-white py-16 text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">Want to See More?</h2>
+    <p class="max-w-2xl mx-auto mb-6">
+        Visit Genius Coaching Center to experience our vibrant learning environment in person.
+    </p>
+    <a asp-action="ContactUs"
+       class="px-8 py-3 bg-yellow-400 text-black font-semibold rounded-xl shadow-lg hover:bg-yellow-500 transition">
+        Contact Us
+    </a>
+</section>

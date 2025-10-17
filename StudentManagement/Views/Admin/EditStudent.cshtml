@@ -1,0 +1,80 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model StudentManagement.Models.admission
+@{
+    ViewBag.Title = "Edit User Detail";
+    Layout = "_AdminLayout";
+}
+
+@* <h1 class="text-center p-2">Edit Student Details</h1> *@
+<h1 class="text-3xl font-bold mb-4 text-center">
+    <span class="border-b-4 border-blue-600">Edit Student Details</span>
+</h1>
+
+<div class="row">
+    <div class="col-sm-6 mx-auto">
+        <form asp-action="UpdateStudent" method="post">
+            <input type="hidden" asp-for="id"/>
+            Enter Student Name :
+            <input type="text" asp-for="name" required placeholder="Enter student name" class="form-control" /><br /><br />
+            Enter Student Mobile Number:
+            <input type="number" asp-for="mobile" readonly required placeholder="Enter student number" class="form-control" /><br /><br />
+            Enter Student Father Name :
+            <input type="text" asp-for="fathername" required placeholder="Enter student Father name" class="form-control" /><br /><br />
+            Enter Student Email Id :
+            <input type="email" asp-for="email" readonly required placeholder="Enter student email" class="form-control" /><br /><br />
+            Select Course Duration :
+            <select required asp-for="duration" class="form-control">
+                <option value="">--Select--</option>
+                <optin>45 Days</optin>
+                <option>6 month</option>
+                <option>PHP</option>
+            </select><br /><br />
+
+            Select Course technology :
+            <select required asp-for="technology" class="form-control">
+                <option value="">--Select--</option>
+                <optin>.net</optin>
+                <option>Java</option>
+                <option>PHP</option>
+            </select><br /><br />
+
+            Enter Registration Fee :
+            <input type="text" asp-for="registrationfee" class="form-control" required placeholder="Registration fee" /><br /><br />
+
+            Enter Total Fee :
+            <input type="text" asp-for="totalfee" class="form-control" required placeholder="Total fee" /><br /><br />
+
+            Select Student Qualification :
+            <select required asp-for="qualification" class="form-control">
+                <option value="">--select--</option>
+                <option>Diploma</option>
+                <option>Graduation</option>
+                <option>Post Graduation</option>
+            </select>
+            <br />
+
+            Select Student Year :
+            <select required asp-for="year" class="form-control">
+                <option value="">--select--</option>
+                <option>1st year</option>
+                <option>2nd year</option>
+                <option>3rd yera</option>
+                <option>4th yera</option>
+                <option>passout</option>
+            </select>
+            <br />
+
+            Enter Student Collage name ;
+            <input type="text" asp-for="college" required placeholder="enter student college name " /><br />
+
+            <button type="reset" class="btn btn-light">Clear</button>
+
+            <button type="submit" class="btn btn-primary">Update</button><br /><br />
+
+
+
+        </form>
+    </div>
+</div>

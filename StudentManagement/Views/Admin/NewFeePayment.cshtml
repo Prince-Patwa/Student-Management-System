@@ -1,0 +1,113 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model StudentManagement.Models.fee
+@{
+    Layout = "_AdminLayout";
+    ViewBag.Title = "New Fee - Admin";
+}
+
+<div class="flex-1 w-full md:ml-0 p-4 overflow-auto">
+    <h1 class="text-3xl font-bold mb-4 text-center">
+        <span class="border-b-4 border-blue-600">New Fee Payment</span>
+    </h1>
+
+    <form method="post" asp-action="NewFeePayment">
+        <div class="row">
+            <div class="col-sm-6">
+                Enter Student Unique ID
+                <input type="number" asp-for="studentid" id="sid" class="form-control" placeholder="Unuque ID" />
+                <br />
+
+                <button type="button" class="btn btn-info" onclick="getdata()">Search</button><br />
+                <hr />
+
+                Enter Student Name
+                <input type="text" asp-for="name" id="sname" readonly class="form-control" placeholder="Student Name" /><br />
+                
+                Enter Student Email
+                <input type="email" asp-for="email" id="email" readonly class="form-control" placeholder="Student email" /><br />
+
+                Enter Student Mobile
+                <input type="number" asp-for="mobile" id="mobile" readonly class="form-control" placeholder="Student mobile number" /><br />
+
+                Enter Student College Name
+                <input type="text" asp-for="college" id="college" readonly class="form-control" placeholder="Student College Name" /><br />
+
+                Enter Student Course Name
+                <input type="text" asp-for="course" id="course" readonly class="form-control" placeholder="Course Name" /><br />
+
+                Enter Year
+                <input type="text" asp-for="year" id="year" readonly class="form-control" placeholder="College Year" /><br />
+
+            </div>
+            <div class="col-sm-6">
+
+
+                Student Technology/Training Name
+                <input type="text" asp-for="training" id="training" readonly class="form-control" placeholder="Training" /><br />
+
+                Registration Fees
+                <input type="text" asp-for="regfee" id="regfee" readonly class="form-control" placeholder="Registration Fee" /><br />
+                <span>Registration Fee Status : <b id="regfeestatus"></b></span><br />
+
+                Total Fees
+                <input type="text" asp-for="totalfee" id="totalfee" readonly class="form-control" palaceholder="Total Fee" /><br />
+
+                Due Fees
+                <input type="text" asp-for="duefee" id="duefee" readonly class="form-control" palaceholder="Due Fees" /><br />
+                <span>Total Payid Till Now: <b id="paidfee"></b><br />
+
+                Select Payment Mode
+                <input type="radio" asp-for="paymentmode" name="paymentmode" value="Online" checked />Online
+                <input type="radio" asp-for="paymentmode" name="paymentmode" value="Cash" />Cash<br /><br />
+
+                Enter Fee Amount to Pay
+                <input type="number" asp-for="amount" class="form-control" id="amount" placeholder="Enter Fee" /><br />
+
+                Enter Remark
+                <textarea class="form-control" asp-for="remark" placeholder="Enter Remark"></textarea><br />
+
+                <button class="btn btn-primary">Submit Fee</button><br />
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    let originalDue = 0;
+    function getdata()
+    {
+        var a = sid.value;
+
+        fetch("http://localhost:5008/api/AdminAPI/findstudent/"+a)     
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => { 
+            // alert(data.name);
+            sname.value = data.name;
+            email.value = data.email; 
+            mobile.value = data.mobile;
+            college.value = data.college;
+            course.value = data.qualification;
+            year.value = data.year; 
+            training.value = data.duration;
+            regfee.value = data.registrationfee;
+            totalfee.value = data.totalfee;
+            duefee.value = data.duefee;
+            paidfee.innerHTML = data.paidfee;
+            regfeestatus.innerHTML = data.paymentstatus;
+
+            originalDue = Number(data.duefee);
+        })
+    }
+
+amount.oninput = function() {
+        let pay = Number(amount.value);
+        let newDue = originalDue - pay;
+
+        if (newDue < 0) newDue = 0;
+        duefee.value = newDue;
+    };
+</script>

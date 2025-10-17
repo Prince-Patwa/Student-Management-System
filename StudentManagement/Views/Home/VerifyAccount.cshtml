@@ -1,0 +1,30 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_WebsiteLayout";
+}
+
+<div class="bg-gray-200 p-4 d-flex justify-center items-center">
+
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+        <div class="d-flex justify-center items-center">
+            <div class="h-[70px] w-[70px] rounded-full border-[5px] border-blue-500 d-flex justify-center items-center">
+                <div class="h-12 w-12 rounded-full border-[5px] border-blue-500 d-flex justify-center items-center">
+                    <h1 class="text-xl text-blue-500 font-bold">OTP</h1>
+                </div>
+            </div>
+        </div>
+
+        <h1 class="text-4xl font-bold text-center mt-4">Verify OTP</h1>
+
+        <p class="text-center mt-2 mb-4">Enter the 4-digit code sent to your registerd email</p>
+
+        <form asp-action="VerifyAccount" method="post">
+            <label class="block font-bold mb-2">Enter OTP</label>
+            <input type="text" required name="otpcode" class="w-full p-2 bg-gray-200 rounded-lg shadow-xl"/>
+            <br />
+            <button type="submit" class="w-full bg-blue-600 rounded-lg text-white font-bold my-3 p-2 shadow-xl hover:bg-blue-800 transition animation">Verify</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,206 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_WebsiteLayout";
+}
+
+
+<!-- Preloader start -->
+<div id="preloader">
+    <div class="spinner"></div>
+</div>
+<!-- Preloader end -->
+
+<!-- Hero Section -->
+<section class="text-center hero-section px-4">
+    <h1 class="text-3xl sm:text-5xl font-extrabold mb-4 text-white drop-shadow-lg">
+        Genius Coaching Center
+    </h1>
+    <p class="text-base sm:text-lg mb-6 max-w-2xl mx-auto text-white drop-shadow">
+        Unlock your true potential with expert guidance, personalized learning,
+        and proven success strategies.
+    </p>
+    <a href="#courses"
+       class="px-6 sm:px-8 py-2 sm:py-3 bg-yellow-400 text-black font-semibold rounded-xl shadow-lg hover:bg-yellow-500 transition">
+        Explore Courses
+    </a>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="py-12 px-4">
+    <div class="max-w-6xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-10 text-gray-800">
+            <span class="border-b-4 border-blue-600">Our Services</span>
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <!-- Service 1 -->
+            <div class="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition">
+                <h3 class="text-xl font-semibold mb-3 text-yellow-500">Personalized Coaching</h3>
+                <p class="text-gray-600 text-sm">
+                    Tailored study plans and one-on-one guidance for better learning outcomes.
+                </p>
+            </div>
+            <!-- Service 2 -->
+            <div class="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition">
+                <h3 class="text-xl font-semibold mb-3 text-yellow-500">Mock Tests</h3>
+                <p class="text-gray-600 text-sm">
+                    Regular practice tests to track progress and boost exam confidence.
+                </p>
+            </div>
+            <!-- Service 3 -->
+            <div class="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition">
+                <h3 class="text-xl font-semibold mb-3 text-yellow-500">Career Counseling</h3>
+                <p class="text-gray-600 text-sm">
+                    Expert advice to help students choose the right career path and goals.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Upcoming Courses (Two Column Design) Start -->
+<section id="upcoming-courses" class="bg-gray-50 py-12 px-4">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+
+        <!-- Left Side Text -->
+        <div>
+            <h2 class="text-3xl font-bold mb-4 text-gray-800">
+                <span class="border-b-4 border-blue-600">Upcoming Courses</span>
+            </h2>
+            <p class="text-gray-600 mb-4 leading-relaxed">
+                Genius Coaching Center is excited to announce our upcoming courses designed
+                to help students excel in their academics and competitive exams. Each course
+                is carefully structured with the right balance of concepts, practice, and doubt sessions.
+            </p>
+            <ul class="list-disc pl-6 text-gray-700 mb-6 space-y-2">
+                <li><b>Advanced Mathematics:</b> Crash course for Class 11th & 12th students (Starts Oct 1, 2025)</li>
+                <li><b>Biology Booster:</b> Focused NEET preparation (Starts Oct 15, 2025)</li>
+                <li><b>Physics Masterclass:</b> Concept + Problem solving (Starts Nov 1, 2025)</li>
+            </ul>
+            <a asp-action="ContactUs"
+               class="px-6 py-3 bg-yellow-400 text-black font-semibold rounded-xl shadow-lg hover:bg-yellow-500 transition">
+                Enroll Now
+            </a>
+        </div>
+
+        <!-- Right Side Image -->
+        <div class="flex justify-center">
+            <img src="https://img.freepik.com/free-vector/education-concept-illustration_114360-633.jpg"
+                 alt="Upcoming Courses"
+                 class="rounded-2xl shadow-lg w-full max-w-md">
+        </div>
+    </div>
+</section>
+<!-- Upcoming Courses (Two Column Design) End -->
+<!-- Upcoming Courses Section Start -->
+<section id="courses" class="bg-gray-50 py-12 px-4">
+    <div class="max-w-6xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-10 text-gray-800">
+            <span class="border-b-4 border-blue-600">Upcoming Courses</span>
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <!-- Course 1 -->
+            <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition">
+                <img src="https://img.freepik.com/free-vector/maths-online-lesson_23-2148653954.jpg"
+                     alt="Maths Course"
+                     class="w-full h-40 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-yellow-500 mb-2">Advanced Mathematics</h3>
+                    <p class="text-gray-600 text-sm mb-3">
+                        Special crash course designed for Class 11th & 12th students.
+                    </p>
+                    <span class="block text-sm text-gray-500 mb-3">Starts from: <b>October 1, 2025</b></span>
+                    <a asp-action="ContactUs"
+                       class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">
+                        Enroll Now
+                    </a>
+                </div>
+            </div>
+
+            <!-- Course 2 -->
+            <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition">
+                <img src="https://img.freepik.com/free-vector/biology-lesson-online_23-2148653961.jpg"
+                     alt="Biology Course"
+                     class="w-full h-40 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-yellow-500 mb-2">Biology Booster</h3>
+                    <p class="text-gray-600 text-sm mb-3">
+                        Focused NEET preparation with detailed doubt-clearing sessions.
+                    </p>
+                    <span class="block text-sm text-gray-500 mb-3">Starts from: <b>October 15, 2025</b></span>
+                    <a asp-action="ContactUs"
+                       class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">
+                        Enroll Now
+                    </a>
+                </div>
+            </div>
+
+            <!-- Course 3 -->
+            <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition">
+                <img src="https://img.freepik.com/free-vector/physics-online-class_23-2148653962.jpg"
+                     alt="Physics Course"
+                     class="w-full h-40 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-yellow-500 mb-2">Physics Masterclass</h3>
+                    <p class="text-gray-600 text-sm mb-3">
+                        Learn physics concepts with experiments & problem-solving practice.
+                    </p>
+                    <span class="block text-sm text-gray-500 mb-3">Starts from: <b>November 1, 2025</b></span>
+                    <a asp-action="ContactUs"
+                       class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">
+                        Enroll Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Upcoming Courses Section End -->
+
+<!-- Testimonial Section Start -->
+<section id="testimonials" class="bg-blue-50 py-12 px-4">
+    <div class="max-w-6xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-10 text-gray-800">
+            <span class="border-b-4 border-yellow-400">What Our Students Say</span>
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <!-- Testimonial 1 -->
+            <div class="bg-white rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-lg transition">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg"
+                     alt="Student 1"
+                     class="w-20 h-20 rounded-full mb-4 object-cover shadow">
+                <p class="text-gray-600 text-sm mb-3 italic">
+                    "Genius Coaching Center helped me improve my confidence and achieve great results in my exams!"
+                </p>
+                <h3 class="text-lg font-semibold text-blue-600">Priya Sharma</h3>
+                <span class="text-sm text-gray-500">Class 12th Student</span>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div class="bg-white rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-lg transition">
+                <img src="https://randomuser.me/api/portraits/men/36.jpg"
+                     alt="Student 2"
+                     class="w-20 h-20 rounded-full mb-4 object-cover shadow">
+                <p class="text-gray-600 text-sm mb-3 italic">
+                    "The teachers are very supportive, and the study material is excellent. Highly recommend this institute!"
+                </p>
+                <h3 class="text-lg font-semibold text-blue-600">Rahul Verma</h3>
+                <span class="text-sm text-gray-500">Engineering Aspirant</span>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="bg-white rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-lg transition">
+                <img src="https://randomuser.me/api/portraits/men/72.jpg"
+                     alt="Student 3"
+                     class="w-20 h-20 rounded-full mb-4 object-cover shadow">
+                <p class="text-gray-600 text-sm mb-3 italic">
+                    "Regular tests and doubt sessions made my preparation much easier. Best coaching I’ve attended!"
+                </p>
+                <h3 class="text-lg font-semibold text-blue-600">Aman Gupta</h3>
+                <span class="text-sm text-gray-500">NEET Aspirant</span>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Testimonial Section End -->

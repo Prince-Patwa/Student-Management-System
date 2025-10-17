@@ -1,0 +1,117 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model StudentManagement.Models.admission
+@{
+    Layout = "_UserLayout";
+    ViewBag.Title = "Student Dashboard";
+}
+
+<div>
+    <h2 class="text-2xl font-semibold mb-6 bg-white p-3 rounded-lg">Welcome, @Model.name <i class="fa-solid fa-hand text-yellow-600"></i></h2>
+
+    <div class="w-full grid lg:grid-cols-2 gap-3 mb-6">
+        <div class="rounded-lg bg-sky-200 shadow-md hover:shadow-xl transition-shadow duration-300">
+            <h1 class="text-blue-600 text-xl font-bold text-center mt-2"><span class="border-b-4 border-black">Profile</span></h1>
+            <div class="p-4 grid lg:grid-cols-2">
+                <p><span class="font-bold">ID : </span>@Model.id</p>
+                <p><span class="font-bold">Name : </span>@Model.name</p>
+                <p><span class="font-bold">Father Name : </span>@Model.fathername</p>
+                <p>
+                    <span class="font-bold">Email ID : </span>@Model.email
+                    @if (Model.EmailOTPStatus.ToString() != "True")
+                    {
+                        <a asp-action="EmailVerificationOTP" asp-route-id="@Model.id" class="bg-blue-600 text-white rounded-md">Verify Email</a>
+                    }
+                    else
+                    {
+                        <span class="bg-green-400 text-white rounded-xl text-sm p-1">Verified</span>
+                    }
+                </p>
+                <p>
+                    <span class="font-bold">Mobile : </span>@Model.mobile
+                    @if (Model.MobileOTPStatus.ToString() != "True")
+                    {
+                        <a asp-action="MobileOTP" class="bg-blue-600 text-white rounded-md" asp-route-id="@Model.id">Verify Mobile</a>
+                    }
+                    else
+                    {
+                        <span class="bg-green-400 text-sm text-white rounded-xl p-1">Verified</span>
+                    }
+                </p>
+                @* <p><span class="font-bold">Qualification : </span>@Model.qualification</p>
+                <p><span class="font-bold">Year : </span>@Model.year</p> *@
+            </div>
+        </div>
+        <div class="rounded-lg bg-violet-200 shadow-md hover:shadow-xl transition-shadow duration-300">
+            <h1 class="text-blue-600 text-xl font-bold text-center mt-2"><span class="border-b-4 border-black">Other Details</span></h1>
+            <div class="p-4 grid lg:grid-cols-2">
+                <p><span class="font-bold">Cource : </span>@Model.technology</p>
+                <p><span class="font-bold">Cource Duration : </span>@Model.duration</p>
+                <p><span class="font-bold">Registration Fee : </span>@Model.registrationfee</p>
+                @* <p><span class="font-bold">Total Fee : </span>@Model.totalfee</p> *@
+                <p><span class="font-bold">Registration Fee Payment Status : </span>@Model.paymentstatus</p>
+                @* <p><span class="font-bold">Admission Date : </span>@Model.datetime</p> *@
+                <p><span class="font-bold">Qualification : </span>@Model.qualification</p>
+                <p><span class="font-bold">Year : </span>@Model.year</p>
+                <p><span class="font-bold">College Name : </span>@Model.college</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-6 mb-6">
+        <div class="bg-orange-200 h-32 p-6 w-full rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+            <p class="text-lg font-bold mb-4">Total Paid Fee</p>
+            <p class="text-xl font-bold text-gray-600">₹ @ViewBag.totalpaidfee</p>
+        </div>
+        <div class="bg-amber-200 h-32 p-6 w-full rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+            <p class="text-lg font-bold mb-4">Due Fee</p>
+            <span class="text-xl font-bold text-gray-600">₹ </span><span class="text-xl font-bold text-gray-600" id="duefee"> </span>
+        </div>
+        <div class="bg-cyan-100 h-32 p-6 w-full rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+            <p class="text-lg font-bold mb-4">Total Fee</p>
+            <span class="text-xl font-bold text-gray-600">₹ @Model.totalfee</span>
+        </div>
+        <div class="bg-rose-200 h-32 p-6 w-full rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+            <p class="text-lg font-bold">Alloted Batch</p>
+            <p class="text-lg font-semibold text-gray-600" id="batchAllot"></p>
+        </div>
+        <div class="bg-emerald-200 h-32 p-6 w-full rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+            <p class="text-lg font-bold mb-4">Technology</p>
+            <p class="text-xl font-bold text-gray-600">@Model.technology</>
+        </div>
+        <div class="bg-orange-200 h-32 p-6 w-full rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+            <p class="text-lg font-bold mb-4">Admission Date</p>
+            <p class="text-xl font-bold text-gray-600">@Model.datetime</p>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var sid = @Model.id;
+    fetch("http://localhost:5008/api/UserAPI/batchallot", { method: "GET" })
+    .then((response)=>{
+        return response.json();
+    })
+    .then((data)=>{
+        // console.table(data);
+        for(var row of data){
+            if(row.studentid == sid){
+                var r = `<tr>
+                    <td>${row.batch.name},</td><br/>
+                </tr>`;
+                batchAllot.innerHTML += r;
+            }
+        } 
+    })
+
+    //for duefee data fetch
+    fetch("http://localhost:5008/api/AdminAPI/findstudent/"+sid)
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            duefee.innerText = data.duefee;
+        })
+</script>

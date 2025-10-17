@@ -1,0 +1,101 @@
+﻿@* 
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<StudentManagement.Models.admission>
+
+@{
+    ViewBag.Title = "Show - All Student";
+    Layout = "_AdminLayout";
+}
+ 
+<div class="row">
+    <div class="col-sm-12 table-responsive" id="myform">
+        <h1 class="text-3xl font-bold mb-4 text-center">
+            <span class="border-b-4 border-blue-600">All Student Data</span>
+        </h1>
+        <table class="table table-bordered table-striped table-hover" id="mytable">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Actions</th>
+                    <th>Student Name</th>
+                    <th>Phone Number</th>
+                    <th>Father Name</th>
+                    <th>Email</th>
+                    <th>Duration</th>
+                    <th>Technology</th>
+                    <th>Registration Fee</th>
+                    <th>Total Fee</th>
+                    <th>Qualification</th>
+                    <th>Year</th>
+                    <th>College</th>
+                    <th>Payment Status</th>
+                    <th>Payment ID</th>
+                    <th>Date & Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var row in Model)
+                {
+                    <tr>
+                        <td>@row.id</td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" asp-action="PrintRegistrationRecipt" asp-route-id="@row.id">Print Recipt</a>
+                            <a class="btn btn-warning btn-sm" asp-action="EditStudent" asp-route-id="@row.id">Edit</a>
+                            <a class="btn btn-danger btn-sm" asp-action="DeleteStudent" asp-route-id="@row.id">Delete</a>
+                        </td>
+                        <td>@row.name</td>
+                        <td>
+                            @row.mobile
+                            @if (row.MobileOTPStatus.ToString() != "True")
+                            {
+                                <a asp-action="MobileOTP" class="btn btn-primary btn-sm" asp-route-id="@row.id">Verify Mobile</a>
+                            }
+                            else
+                            {
+                                <span class="bg-green-400 text-white rounded-xl p-1">Verified</span>
+                            }
+                        </td>
+                        <td>@row.fathername</td>
+                        <td>
+                            @row.email
+                            @if(row.EmailOTPStatus.ToString() != "True")
+                            {
+                                <a asp-action="EmailVerificationOTP" asp-route-id="@row.id" class="btn btn-primary btn-sm">Verify Email</a>
+                            }
+                            else
+                            {
+                                <span class="bg-green-400 text-white rounded-xl p-1">Verified</span>
+                            }
+                        </td>
+                        <td>@row.duration</td>
+                        <td>@row.technology</td>
+                        <td>
+                            @row.registrationfee
+                            <br/>
+                            @if(row.paymentstatus != "Success")
+                            {
+                                <a class="btn btn-sm btn-success" asp-action="SendLink">Send Payment Link</a>
+                            }
+                        </td>
+                        <td>@row.totalfee</td>
+                        <td>@row.qualification</td>
+                        <td>@row.year</td>
+                        <td>@row.college</td>
+                        <td>
+                            @row.paymentstatus
+
+                            @if (row.paymentstatus == "Failed")
+                            {
+                                <a asp-action="RetryRegistrationFee" asp-route-id="@row.id" class="btn btn-warning btn-sm">Retry</a>
+                            }
+                        </td>
+                        <td>@row.paymentid</td>
+                        <td>@row.datetime</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

@@ -1,0 +1,55 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@* @{
+    Layout = "_AdminLayout";
+    ViewBag.Title = "Verify Mobile OTP";
+}
+
+<h1 class="text-3xl font-bold mb-4 text-center">
+    <span class="border-b-4 border-blue-600">Verify Mobile OTP</span>
+
+</h1>
+<form asp-action="VerifyMobileOTP" method="post">
+    <div class="form-group">
+        <input type="hidden" name="id" value="@ViewBag.id" />
+        <label for="mobile">Mobile Number</label>
+        <input type="text" class="form-control" id="mobile" name="mobile" value="@ViewBag.mobile" readonly />
+    </div>
+    <div class="form-group">
+
+        <label for="otp">Enter OTP</label>
+        <input type="text" class="form-control" id="otp" name="otp" placeholder="Enter OTP" required />
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Verify OTP</button>
+
+</form> *@
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model StudentManagement.Models.admission
+@{
+    ViewBag.Title = "Confirm Mobile OTP";
+    Layout = "_AdminLayout";
+}
+
+<h1 class="text-3xl font-bold mb-4 text-center">
+    <span class="border-b-4 border-blue-600">Verify Mobile OTP</span>
+</h1>
+
+<div class="d-flex justify-center align-ceter w-full p-5">
+    <div class="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl">
+        <h1 class="text-xl my-3">Verify OTP</h1>
+        <p class="text-center text-red-400">@TempData["otp"]</p>
+        <form method="post" asp-action="VerifyMobileOTP">
+            <input type="hidden" asp-for="id" />
+            <label class="d-block text-gray-700 font-bold">Enter OTP</label>
+            <input type="number" name="mobileotp" class="w-full p-2 my-2 bg-gray-100 rounded-md hover:bg-gray-200" />
+
+            <button type="submit" class="bg-blue-500 p-2 d-block w-full rounded-md text-white font-bold my-3 hover:bg-blue-700">Verify</button>
+        </form>
+    </div>
+</div>

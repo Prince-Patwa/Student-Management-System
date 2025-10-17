@@ -1,0 +1,74 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model StudentManagement.Models.enquiry
+@{
+    Layout = "_WebsiteLayout";
+}
+
+<!-- Contact Hero -->
+<section class="bg-blue-600 text-white py-16 px-6 text-center">
+    <h1 class="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
+    <p class="max-w-2xl mx-auto text-lg">
+        Have questions or need assistance? We're here to help. Get in touch with us today!
+    </p>
+</section>
+
+<!-- Contact Section -->
+<section class="py-16 px-6 bg-gray-50">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+        <!-- Left Side: Map + Info -->
+        <div>
+            <!-- Map upar -->
+            <div class="w-full h-64 mb-6">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3680.591463032832!2d75.8577!3d22.7196!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39630329e38c1cdd%3A0xb1d36e8a72e5f69!2sIndore%2C%20Madhya%20Pradesh!5e0!3m2!1sen!2sin!4v1637058937385!5m2!1sen!2sin"
+                        class="w-full h-full rounded-lg border-0" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+
+            <!-- Contact Info niche -->
+            <h2 class="text-3xl font-bold mb-6 text-gray-800">
+                <span class="border-b-4 border-yellow-400">Get In Touch</span>
+            </h2>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+                Reach out to us for admissions, course details, or any queries.
+                Our team will respond promptly to assist you.
+            </p>
+            <ul class="space-y-4 text-gray-700">
+                <li><b>📍 Address:</b> 123 Genius Street, Indore, MP</li>
+                <li><b>📞 Phone:</b> +91 98765 43210</li>
+                <li><b>✉️ Email:</b> info@geniuscoaching.com</li>
+                <li><b>🕒 Office Hours:</b> Mon - Sat, 9:00 AM - 7:00 PM</li>
+            </ul>
+        </div>
+
+        <!-- Right Side: Contact Form -->
+        <div class="bg-white rounded-2xl shadow-md p-8">
+            <h3 class="text-2xl font-semibold mb-6 text-gray-800">Send Us a Message</h3>
+
+            <p class="text-lg text-green-300 text-center pb-2">@TempData["enq"]</p>
+
+            <form asp-action="Enquiry" method="post" class="space-y-5">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                    <input type="text" asp-for="name" placeholder="Enter your name"
+                           class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <input type="email" asp-for="email" placeholder="Enter your email"
+                           class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                    <textarea rows="5" asp-for="description" placeholder="Write your message"
+                              class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+                </div>
+                <button type="submit"
+                        class="w-full bg-yellow-400 text-black font-semibold py-3 rounded-lg hover:bg-yellow-500 transition">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </div>
+</section>

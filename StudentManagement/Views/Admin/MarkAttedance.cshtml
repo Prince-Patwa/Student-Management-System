@@ -1,0 +1,71 @@
+﻿@model IEnumerable<StudentManagement.Models.batch>
+
+@{
+    ViewBag.Title = "Mark Attendance-Admin";
+    Layout = "_AdminLayout";
+}
+
+<h1 class="text-3xl font-bold mb-4 text-center">
+    <span class="border-b-4 border-blue-600">Mark Attendance</span>
+</h1>
+
+<form class="card p-4 shadow-sm bg-light" method="post" asp-action="SaveAttendance">
+    <div class="mb-3">
+        <label for="batchid" class="form-label fw-bold">Select a Batch to Mark Attendance:</label>
+        <select name="batchid" id="batchid" class="form-select" required>
+            <option value="">-- Select Batch --</option>
+            @foreach (var row in Model)
+            {
+                <option value="@row.id">@row.name</option>
+            }
+        </select>
+        <br />
+        Select date to mark
+        @{
+			string today = DateTime.Now.ToString("yyyy-MM-dd");
+        }
+        <input type="date" class="form-control" name="date" value="@today" req />
+    </div>
+    <button type="button" class="btn btn-primary mb-3" onclick="getstudents()">Show Student</button>
+    <hr />
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Select</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody id="allstudents">
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-success">Save Attendance</button>
+    </div>
+</form>
+ 
+<script>
+    function getstudents(){
+        var id = batchid.value;
+        if(id!=""){
+            fetch("http://localhost:5008/api/AdminAPI/studentsinbatch/"+id)
+            .then((response)=>{
+                return response.json();
+            })
+            .then((data)=>{
+                 console.log(data);
+                allstudents.innerHTML += "";
+                for(var row of data){
+                    var x = `<tr>
+                    <td>${row.admission.id}</td>
+                    <td><input type="checkbox" name="selectedtstudent" value="${row.admission.id}"/></td>
+                    <td>${row.admission.name}</td>
+
+                    </tr>`
+                    allstudents.innerHTML += x;
+                }
+            })
+        }
+
+    }
+</script>*
