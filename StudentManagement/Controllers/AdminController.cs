@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.VisualBasic;
 using StudentManagement.Models;
 using StudentManagement.Services;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -22,11 +23,13 @@ namespace StudentManagement.Controllers
         DatabaseConnectionEF connectionEF;
         EmailSender emailSender;
         SMSSender smssender;
-        public AdminController(DatabaseConnectionEF connectionEF, EmailSender emailSender, SMSSender smssender)
+        PaymentLink payment;
+        public AdminController(DatabaseConnectionEF connectionEF, EmailSender emailSender, SMSSender smssender, PaymentLink payment)
         {
             this.connectionEF = connectionEF;
             this.emailSender = emailSender;
             this.smssender = smssender;
+            this.payment = payment;
         }
 
         public IActionResult Index()
@@ -620,6 +623,32 @@ namespace StudentManagement.Controllers
                 TempData["mobileotp"] = "Incorrect OTP";
                 return RedirectToAction("VerifyMobileOTP");
             }
+        }
+
+        public async Task<IActionResult> SendLink(int id)
+        {
+            var data = connectionEF.admission.Find(id);
+
+            string name = data.name;
+            string mobile = data.mobile;
+            string email = data.email;
+            double fee = double.Parse(data.registrationfee);
+
+            string callback = "http://localhost:5008/Admin/PaymentLinkStatus/"+id+"/";
+
+            string link = await payment.CreatePaymentLink(fee, name, email, mobile, callback);
+
+            string subject = "Payment Link for Registration Fee from Genius Coaching Center";
+            string message = "Dear " + name + ", Please pay your registration fee using the following link: " + link;
+
+            await emailSender.SendEmail(email, subject, message);
+
+            return RedirectToAction("AllStudents");
+        }
+
+        public IActionResult PaymentLinkStatus(int id)
+        {
+            return Content("PaymentLink Data");
         }
     }
 }

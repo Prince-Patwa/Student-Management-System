@@ -75,7 +75,7 @@
                             <br/>
                             @if(row.paymentstatus != "Success")
                             {
-                                <a class="btn btn-sm btn-success" asp-action="SendLink">Send Payment Link</a>
+                                <a class="btn btn-sm btn-success" asp-route-id="@row.id" asp-action="SendLink">Send Payment Link</a>
                             }
                         </td>
                         <td>@row.totalfee</td>

@@ -17,7 +17,7 @@ namespace StudentManagement.Services
 
             try
             {
-                string apiurl = "https://phpcrud.himanshukashyap.com/rzp/createLink.php?amount=" + amount.ToString() + "&name=" + name + "&mobile=" + mobile + "&email=" + email + "&callback_url=" + callback_url;
+                string apiurl = "https://phpcrud.himanshukashyap.com/rzp/createLink.php?mode=test&amount=" + amount.ToString() + "&name=" + name + "&mobile=" + mobile + "&email=" + email + "&callback_url=" + callback_url;
 
                 HttpResponseMessage response = await _httpClient.GetAsync(apiurl);
 
